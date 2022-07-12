@@ -1,11 +1,11 @@
 import axios from "axios"
 
 
-export const HandleSubmitImages = async (evento, images) => {
+export const HandleSubmitImages = async (e, images) => {
 
-  const imagen = images[0].file;
-  console.log(imagen)
-  // console.log(images.file);
+  const imagen = images[0].file[0];
+  console.log(imagen);
+  // console.log(e.target.files.name)
   const formData = new FormData();
 
   formData.append('file', imagen);

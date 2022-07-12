@@ -12,7 +12,7 @@ export const uploadImg = async (req, res) => {
  
 
     try {
-        console.log(req.body.file);
+        console.log(req.files);
         const { container } = req.body;
         const { originalname, buffer } = req.files;
 
