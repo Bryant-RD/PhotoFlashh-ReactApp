@@ -29,19 +29,20 @@ function App() {
 
 
         if(images.length > 0  ){
-          // console.log(newImgsToState);
-          // setImages(olData => [...olData, newImgsToState[0]])
           const newImgsState = images.concat(newImgsToState);
           console.log(newImgsState);
           setImages(newImgsState)
         }else{
           setImages(newImgsToState)
         }
-
+      // console.log(images.file);
   } 
 
   function readmultifiles(e, indexInicial) {
     const files = e.currentTarget.files;
+
+    let imagenes = e.currentTarget.files;
+    console.log(imagenes);
 
     //el array con las imagenes nuevas
     const arrayImages = [];
@@ -51,12 +52,12 @@ function App() {
 
       let url = URL.createObjectURL(file);
 
-      //console.log(file);
+      // console.log(file);
       arrayImages.push({
         index: indexInicial,
         name: file.name,
         url,
-        file
+        file: imagenes
       });
 
       indexInicial++;
@@ -68,19 +69,16 @@ function App() {
 
   function deleteImg(indice) {
 
-    let dt = new DataTransfer()
+    // let dt = new DataTransfer()
 
     
-    for(let  i = 0; i < eventImg.target.files.length; i++){
-      const restFile = eventImg.target.files
-        console.log(restFile)
-    }
+    // for(let  i = 0; i < eventImg.target.files.length; i++){
+    //   const restFile = eventImg.target.files  
+    //     console.log(restFile)
+    // }
 
-
-    
-
-    // const newImgs = images.filter((item) => item.index !== indice.index)
-    // setImages(newImgs);
+    const newImgs = images.filter((item) => item.index !== indice.index)
+    setImages(newImgs);
   }
 
 
@@ -117,7 +115,7 @@ function App() {
       </div>
       <div id="botones" className="w-full justify-center px-2 fixed" >
         <form className="flex justify-center">
-          <input type="file" multiple name="images" id="inputImg"
+          <input type="file" multiple name="file" id="inputImg"
           className="file:bg-rojo file:text-xl file:text-white file:font-semibold file:rounded-lg file:px-6 file:py-3.5 file:my-3 file:w-auto file:absolute text-white"
           onChange={handleTakeImages}
             />
@@ -126,7 +124,7 @@ function App() {
           className="bg-verde text-xl text-white font-semibold rounded-lg px-14 py-4 my-3 flex-1 mx-1 absolute ml-48"
           onClick={ (e)=> {
             e.preventDefault();
-            HandleSubmitImages(eventImg) // 365 677
+            HandleSubmitImages(eventImg, images) // 365 677
           } }
           >
             Enviar

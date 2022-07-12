@@ -6,6 +6,6 @@ const upload = multer();
 
 const blobRouter = Router();
 
-blobRouter.post("/upload-img", upload.single("file"), uploadImg)
+blobRouter.post("/upload-img", upload.array("file", 12), uploadImg)
 
 export default blobRouter
