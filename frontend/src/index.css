@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+   min-height: 100vh;
+    background-image: url('./img/background.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#botones {
+    margin-top: 156vh;
+}
+#inputImg {
+    color: #ff000000;
+}
+#caja {
+    margin-left: 177px;
+}
