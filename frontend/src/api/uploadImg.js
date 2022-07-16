@@ -5,11 +5,12 @@ export const HandleSubmitImages = async (e, images) => {
 
   const imagen = images[0].file[0];
   console.log(imagen);
-  // console.log(e.target.files.name)
+
   const formData = new FormData();
 
-  formData.append('file', imagen);
-
+  images.forEach((image) => {
+    formData.append("image", image.file[0])
+  });
 
   return await axios.post("/storage/blob/upload-img", formData, {
     headers: {
