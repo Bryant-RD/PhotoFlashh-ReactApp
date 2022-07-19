@@ -1,13 +1,25 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { HandleSubmitImages } from "../api/uploadImg.js"
 import logo from "../img/logo1.png"
+import socket from "../components/Socket.js";
 
 export function Formuario() {
 
+  // const query = new URLSearchParams(useLocation().search);
+  // console.log(query);
+
+
+  let mensaje = "hola desde react"
+
+  socket.emit('mensaje', mensaje)
+  socket.on('message',  rec => {
+    console.log(rec);
+  })
+  
+
     const [images, setImages] = useState([]);
-    const [eventImg, setEventImg] = useState([]);
     const handleTakeImages = (e) => {
-      setEventImg(e)
           //esto es el indice que se le dará a cada imagen, a partir del indice de la ultima foto
           let indexImg;
   
@@ -108,7 +120,12 @@ export function Formuario() {
             className="bg-verde text-xl text-white font-semibold rounded-lg px-14 py-4 my-3 flex-1 mx-1 absolute ml-48"
             onClick={ (e)=> {
               e.preventDefault();
-              HandleSubmitImages(eventImg, images) // 365 677
+              let namesImages = [];
+              for (let i = 0; i < images.length; i++) {
+                namesImages.push(images[i].name)
+              }
+              socket.emit('nameImages', namesImages);
+              HandleSubmitImages(images) // 365 677
             } }
             >
               Enviar

@@ -9,9 +9,6 @@ const bucketName = process.env.BUCKET_NAME;
 
 export const uploadImg = async (req, res) => {
 
-    // console.log(req.body.files);
- 
-
     try {
         console.log(req.files);
         const { container } = req.body;

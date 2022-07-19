@@ -1,7 +1,7 @@
 import axios from "axios"
 
 
-export const HandleSubmitImages = async (e, images) => {
+export const HandleSubmitImages = async (images) => {
 
   const formData = new FormData();
 
