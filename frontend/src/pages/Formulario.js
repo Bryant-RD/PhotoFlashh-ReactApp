@@ -1,21 +1,35 @@
-import { useEffect, useState } from "react"
-import { useLocation } from "react-router-dom"
+import { useState } from "react"
+import { useParams } from "react-router-dom"
 import { HandleSubmitImages } from "../api/uploadImg.js"
 import logo from "../img/logo1.png"
-import socket from "../components/Socket.js";
+// import socket from "../components/Socket.js";
+import { io } from "socket.io-client";
+
+
 
 export function Formuario() {
 
-  // const query = new URLSearchParams(useLocation().search);
-  // console.log(query);
+  let { id } = useParams();
 
 
-  let mensaje = "hola desde react"
+  // socket.emit('room', id);
 
-  socket.emit('mensaje', mensaje)
+  // console.log(id);
+
+  const socket = io("http://localhost:4000", {
+    query: {
+      roomName: id
+    }
+  })
+
+  // socket.on('message', rec => {
+  //   console.log(rec);
+  // })
+
   socket.on('message',  rec => {
     console.log(rec);
   })
+  // socket.emit('idCliente', id);
   
 
     const [images, setImages] = useState([]);

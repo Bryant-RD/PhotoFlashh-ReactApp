@@ -31,19 +31,33 @@ const io = new WebSocketServer(httpServer, {
   }
 })
 
-const message = "hola desde nodeJS"
 
 io.on('connection', socket => {
   console.log("new Connection");
-  socket.emit('message', message)
+
+
+
+  const {roomName} = socket.handshake.query;
+  socket.join(roomName)
+
+  const message = "hola desde nodeJS, en la sala: " + roomName;
+
+  io.in(roomName).emit('message', message)
 
   socket.on('mensaje', mensaje => {
     console.log(mensaje);
   })
 
-  socket.on('nameImages', nameImages => {
-    console.log(nameImages);
-  })
+  // socket.on('idCliente', id => {
+  //   socket.join(id);
+
+
+  //   console.log(id);
+  // }) 
+
+  // socket.on('nameImages', nameImages => {
+  //   console.log(nameImages);
+  // })
 
   socket.on("discconect", () => {
     console.log("usuario desconectado");
