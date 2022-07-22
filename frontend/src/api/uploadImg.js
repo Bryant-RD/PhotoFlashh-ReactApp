@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 export const HandleSubmitImages = async (images) => {
 
   const formData = new FormData();
@@ -14,7 +13,6 @@ export const HandleSubmitImages = async (images) => {
       "Content-Type": "multipart/form-data"
     },
   });
-
   console.log(retorno.data);
 
   return retorno

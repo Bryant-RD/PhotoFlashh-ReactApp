@@ -11,25 +11,20 @@ export function Formuario() {
 
   let { id } = useParams();
 
-
-  // socket.emit('room', id);
-
-  // console.log(id);
-
   const socket = io("http://localhost:4000", {
     query: {
       roomName: id
     }
   })
 
-  // socket.on('message', rec => {
-  //   console.log(rec);
-  // })
 
   socket.on('message',  rec => {
     console.log(rec);
+    // socket.disconnect();
   })
-  // socket.emit('idCliente', id);
+
+  socket.emit('fromReact', "Hola desde React");
+  
   
 
     const [images, setImages] = useState([]);
@@ -51,7 +46,7 @@ export function Formuario() {
   
           if(images.length > 0  ){
             const newImgsState = images.concat(newImgsToState);
-            console.log(newImgsState);
+            // console.log(newImgsState);
             setImages(newImgsState)
           }else{
             setImages(newImgsToState)
@@ -63,7 +58,7 @@ export function Formuario() {
       const files = e.currentTarget.files;
   
       let imagenes = e.currentTarget.files;
-      console.log(imagenes);
+      // console.log(imagenes);
   
       //el array con las imagenes nuevas
       const arrayImages = [];
@@ -138,8 +133,8 @@ export function Formuario() {
               for (let i = 0; i < images.length; i++) {
                 namesImages.push(images[i].name)
               }
-              socket.emit('nameImages', namesImages);
               HandleSubmitImages(images) // 365 677
+              socket.emit('namesImages', namesImages);
             } }
             >
               Enviar

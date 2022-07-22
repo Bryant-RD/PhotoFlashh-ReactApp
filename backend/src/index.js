@@ -42,21 +42,15 @@ io.on('connection', socket => {
 
   const message = "hola desde nodeJS, en la sala: " + roomName;
 
-  io.in(roomName).emit('message', message)
+  io.in(roomName).emit('message', message);
 
-  socket.on('mensaje', mensaje => {
-    console.log(mensaje);
+  socket.on('namesImages', namesImages => {
+    console.log(namesImages);
+    socket.in(roomName).emit('imagenes', namesImages);
   })
 
-  // socket.on('idCliente', id => {
-  //   socket.join(id);
-
-
-  //   console.log(id);
-  // }) 
-
-  // socket.on('nameImages', nameImages => {
-  //   console.log(nameImages);
+  // socket.on('fromReact', mensaje => {
+  //   console.log(mensaje);
   // })
 
   socket.on("discconect", () => {
